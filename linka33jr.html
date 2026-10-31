@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jízdní řád - Linka 33 (DPMB & PMDP)</title>
 <style>
-* {
-box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 body {
 font-family: Arial, Helvetica, sans-serif;
 background-color: #f4f6f9;
 color: #111;
 margin: 0;
-padding: 10px;
+padding: 8px;
 }
 .container {
 max-width: 100%;
@@ -21,17 +19,15 @@ margin: 0 auto;
 background: #ffffff;
 border: 1px solid #000;
 padding: 10px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
-/* Header */
 .header {
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
 align-items: center;
 border-bottom: 2px solid #000;
-padding-bottom: 10px;
-margin-bottom: 15px;
+padding-bottom: 8px;
+margin-bottom: 12px;
 gap: 10px;
 }
 .header-left {
@@ -42,20 +38,19 @@ gap: 10px;
 .line-badge {
 background-color: #d97706;
 color: #fff;
-font-size: 24pt;
+font-size: 22pt;
 font-weight: 900;
-padding: 2px 12px;
+padding: 2px 10px;
 border-radius: 4px;
-display: inline-block;
 }
 .header-title h1 {
 margin: 0;
-font-size: 14pt;
+font-size: 13pt;
 text-transform: uppercase;
 }
 .header-title p {
 margin: 2px 0 0 0;
-font-size: 9pt;
+font-size: 8.5pt;
 color: #444;
 }
 .meta-info {
@@ -66,13 +61,12 @@ line-height: 1.3;
 background-color: #1e293b;
 color: #fff;
 padding: 6px 10px;
-font-size: 10pt;
+font-size: 9.5pt;
 font-weight: bold;
 margin-top: 15px;
 margin-bottom: 5px;
 text-transform: uppercase;
 }
-/* HORIZONTAL SCROLL FOR MOBILE & GITHUB */
 .table-wrapper {
 width: 100%;
 overflow-x: auto;
@@ -82,13 +76,12 @@ border: 1px solid #000;
 }
 table {
 width: max-content;
-min-width: 100%;
 border-collapse: collapse;
-font-size: 8pt;
+font-size: 7.5pt;
 }
 th, td {
 border: 1px solid #000;
-padding: 4px 5px;
+padding: 4px 6px;
 text-align: center;
 white-space: nowrap;
 }
@@ -96,7 +89,6 @@ th {
 background-color: #e2e8f0;
 font-weight: bold;
 }
-/* Sticky Left Column for Stop Names */
 td.stop-name, th.sticky-col {
 position: sticky;
 left: 0;
@@ -104,15 +96,15 @@ z-index: 2;
 background-color: #f8fafc;
 text-align: left;
 font-weight: bold;
-min-width: 150px;
-box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+min-width: 140px;
+box-shadow: 2px 0 4px rgba(0,0,0,0.12);
 }
 th.sticky-col {
 background-color: #cbd5e1;
 z-index: 3;
 }
 td.km, td.zone {
-font-size: 7.5pt;
+font-size: 7pt;
 color: #555;
 background-color: #fff;
 }
@@ -122,36 +114,33 @@ background-color: #f9fafb;
 .note-row td {
 background-color: #fef3c7 !important;
 font-weight: bold;
-font-size: 7.5pt;
+font-size: 7pt;
 }
 .info-box {
 border: 1px solid #000;
 background-color: #f8fafc;
-padding: 10px;
+padding: 8px;
 margin-top: 15px;
 font-size: 8.5pt;
 }
 .info-box ul {
-margin: 5px 0 0 18px;
+margin: 4px 0 0 18px;
 padding: 0;
 }
 .tag-short {
 color: #b91c1c;
 font-weight: bold;
 }
-/* Responsive Mobile Tweak */
 @media (max-width: 600px) {
 body { padding: 4px; }
-.header-title h1 { font-size: 12pt; }
-.line-badge { font-size: 20pt; padding: 2px 8px; }
-.meta-info { font-size: 8pt; width: 100%; }
-th, td { padding: 3px 4px; font-size: 7.5pt; }
+.header-title h1 { font-size: 11pt; }
+.line-badge { font-size: 18pt; padding: 1px 7px; }
+th, td { padding: 3px 5px; font-size: 7pt; }
 }
 </style>
 </head>
 <body>
 <div class="container">
-<!-- Header -->
 <div class="header">
 <div class="header-left">
 <div class="line-badge">33</div>
@@ -163,134 +152,80 @@ th, td { padding: 3px 4px; font-size: 7.5pt; }
 <div class="meta-info">
 <strong>Trasa:</strong> Lotnisko – Rynek Glowny – Os. Zgody
 
-<strong>Provozní doba:</strong> 0:00 – 22:00 (Kompletní jízdní řád)
+<strong>Provozní doba:</strong> 0:00 – 22:00 (Interval ~10 min)
 </div>
 </div>
-<!-- Směr TAM -->
+<!-- SMĚR TAM -->
 <div class="section-title">Směr: Lotnisko ➔ Rynek Glowny ➔ Os. Zgody</div>
 <div class="table-wrapper">
-<table id="table-outbound">
-<!-- Dynamicky generováno pro kompletní spoje od 0:00 do 22:00 -->
+<table>
+<thead>
+<tr>
+<th style="width: 25px;">km</th>
+<th style="width: 30px;">Zóna</th>
+<th class="sticky-col">Zastávka</th>
+<th>1</th><th>3</th><th>5</th><th>7</th><th>9</th><th>11</th><th>13</th><th>15</th><th>17</th><th>19</th><th>21</th><th>23</th><th>25</th><th>27</th><th>29</th><th>31</th><th>33</th><th>35</th><th>37</th><th>39</th><th>41</th><th>43</th><th>45</th><th>47</th><th>49</th><th>51</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="km">0</td><td class="zone">100</td><td class="stop-name">Lotnisko (pauza 10 min)</td><td>0:00</td><td>0:10</td><td>0:20</td><td>0:30</td><td>0:40</td><td>0:50</td><td>1:00</td><td>1:10</td><td>1:20</td><td>1:30</td><td>1:40</td><td>1:50</td><td>2:00</td><td>2:10</td><td>2:20</td><td>2:30</td><td>2:40</td><td>2:50</td><td>3:00</td><td>3:10</td><td>3:20</td><td>3:30</td><td>3:40</td><td>3:50</td><td>4:00</td><td>4:10</td></tr>
+<tr><td class="km">2</td><td class="zone">100</td><td class="stop-name">Slaska</td><td>0:02</td><td>0:12</td><td>0:22</td><td>0:32</td><td>0:42</td><td>0:52</td><td>1:02</td><td>1:12</td><td>1:22</td><td>1:32</td><td>1:42</td><td>1:52</td><td>2:02</td><td>2:12</td><td>2:22</td><td>2:32</td><td>2:42</td><td>2:52</td><td>3:02</td><td>3:12</td><td>3:22</td><td>3:32</td><td>3:42</td><td>3:52</td><td>4:02</td><td>4:12</td></tr>
+<tr><td class="km">4</td><td class="zone">100</td><td class="stop-name">Rzedzin Petla</td><td>0:04</td><td>0:14</td><td>0:24</td><td>0:34</td><td>0:44</td><td>0:54</td><td>1:04</td><td>1:14</td><td>1:24</td><td>1:34</td><td>1:44</td><td>1:54</td><td>2:04</td><td>2:14</td><td>2:24</td><td>2:34</td><td>2:44</td><td>2:54</td><td>3:04</td><td>3:14</td><td>3:24</td><td>3:34</td><td>3:44</td><td>3:54</td><td>4:04</td><td>4:14</td></tr>
+<tr><td class="km">5</td><td class="zone">100</td><td class="stop-name">Rzedzin</td><td>0:05</td><td>0:15</td><td>0:25</td><td>0:35</td><td>0:45</td><td>0:55</td><td>1:05</td><td>1:15</td><td>1:25</td><td>1:35</td><td>1:45</td><td>1:55</td><td>2:05</td><td>2:15</td><td>2:25</td><td>2:35</td><td>2:45</td><td>2:55</td><td>3:05</td><td>3:15</td><td>3:25</td><td>3:35</td><td>3:45</td><td>3:55</td><td>4:05</td><td>4:15</td></tr>
+<tr><td class="km">7</td><td class="zone">101</td><td class="stop-name">Witosa</td><td>0:07</td><td>0:17</td><td>0:27</td><td>0:37</td><td>0:47</td><td>0:57</td><td>1:07</td><td>1:17</td><td>1:27</td><td>1:37</td><td>1:47</td><td>1:57</td><td>2:07</td><td>2:17</td><td>2:27</td><td>2:37</td><td>2:47</td><td>2:57</td><td>3:07</td><td>3:17</td><td>3:27</td><td>3:37</td><td>3:47</td><td>3:57</td><td>4:07</td><td>4:17</td></tr>
+<tr><td class="km">9</td><td class="zone">101</td><td class="stop-name">Kochłowice</td><td>0:09</td><td>0:19</td><td>0:29</td><td>0:39</td><td>0:49</td><td>0:59</td><td>1:09</td><td>1:19</td><td>1:29</td><td>1:39</td><td>1:49</td><td>1:59</td><td>2:09</td><td>2:19</td><td>2:29</td><td>2:39</td><td>2:49</td><td>2:59</td><td>3:09</td><td>3:19</td><td>3:29</td><td>3:39</td><td>3:49</td><td>3:59</td><td>4:09</td><td>4:19</td></tr>
+<tr><td class="km">11</td><td class="zone">101</td><td class="stop-name">Dworcowa</td><td>0:11</td><td>0:21</td><td>0:31</td><td>0:41</td><td>0:51</td><td>1:01</td><td>1:11</td><td>1:21</td><td>1:31</td><td>1:41</td><td>1:51</td><td>2:01</td><td>2:11</td><td>2:21</td><td>2:31</td><td>2:41</td><td>2:51</td><td>3:01</td><td>3:11</td><td>3:21</td><td>3:31</td><td>3:41</td><td>3:51</td><td>4:01</td><td>4:11</td><td>4:21</td></tr>
+<tr><td class="km">13</td><td class="zone">101</td><td class="stop-name">Tram Depot</td><td>0:13</td><td>0:23</td><td>0:33</td><td>0:43</td><td>0:53</td><td>1:03</td><td>1:13</td><td>1:23</td><td>1:33</td><td>1:43</td><td>1:53</td><td>2:03</td><td>2:13</td><td>2:23</td><td>2:33</td><td>2:43</td><td>2:53</td><td>3:03</td><td>3:13</td><td>3:23</td><td>3:33</td><td>3:43</td><td>3:53</td><td>4:03</td><td>4:13</td><td>4:23</td></tr>
+<tr><td class="km">15</td><td class="zone">102</td><td class="stop-name">Os. 30 Lecia</td><td>0:15</td><td>0:25</td><td>0:35</td><td>0:45</td><td>0:55</td><td>1:05</td><td>1:15</td><td>1:25</td><td>1:35</td><td>1:45</td><td>1:55</td><td>2:05</td><td>2:15</td><td>2:25</td><td>2:35</td><td>2:45</td><td>2:55</td><td>3:05</td><td>3:15</td><td>3:25</td><td>3:35</td><td>3:45</td><td>3:55</td><td>4:05</td><td>4:15</td><td>4:25</td></tr>
+<tr><td class="km">17</td><td class="zone">102</td><td class="stop-name">Rynek Glowny</td><td>0:17</td><td>0:27</td><td>0:37</td><td>0:47</td><td>0:57</td><td>1:07</td><td>1:17</td><td>1:27</td><td>1:37</td><td>1:47</td><td>1:57</td><td>2:07</td><td>2:17</td><td>2:27</td><td>2:37</td><td>2:47</td><td>2:57</td><td>3:07</td><td>3:17</td><td>3:27</td><td>3:37</td><td>3:47</td><td>3:57</td><td>4:07</td><td>4:17</td><td>4:27</td></tr>
+<tr><td class="km">19</td><td class="zone">102</td><td class="stop-name">Blachownia</td><td>0:19</td><td>0:29</td><td>0:39</td><td>0:49</td><td>0:59</td><td>1:09</td><td>1:19</td><td>1:29</td><td>1:39</td><td>1:49</td><td>1:59</td><td>2:09</td><td>2:19</td><td>2:29</td><td>2:39</td><td>2:49</td><td>2:59</td><td>3:09</td><td>3:19</td><td>3:29</td><td>3:39</td><td>3:49</td><td>3:59</td><td>4:09</td><td>4:19</td><td>4:29</td></tr>
+<tr><td class="km">20</td><td class="zone">102</td><td class="stop-name">Blachownia PKP</td><td>0:20</td><td>0:30</td><td>0:40</td><td>0:50</td><td>1:00</td><td>1:10</td><td>1:20</td><td>1:30</td><td>1:40</td><td>1:50</td><td>2:00</td><td>2:10</td><td>2:20</td><td>2:30</td><td>2:40</td><td>2:50</td><td>3:00</td><td>3:10</td><td>3:20</td><td>3:30</td><td>3:40</td><td>3:50</td><td>4:00</td><td>4:10</td><td>4:20</td><td>4:30</td></tr>
+<tr><td class="km">21</td><td class="zone">103</td><td class="stop-name">Warsawska</td><td>0:21</td><td>0:31</td><td>0:41</td><td>0:51</td><td>1:01</td><td>1:11</td><td>1:21</td><td>1:31</td><td>1:41</td><td>1:51</td><td>2:01</td><td>2:11</td><td>2:21</td><td>2:31</td><td>2:41</td><td>2:51</td><td>3:01</td><td>3:11</td><td>3:21</td><td>3:31</td><td>3:41</td><td>3:51</td><td>4:01</td><td>4:11</td><td>4:21</td><td>4:31</td></tr>
+<tr><td class="km">23</td><td class="zone">103</td><td class="stop-name">Mrozka</td><td>0:23</td><td>0:33</td><td>0:43</td><td>0:53</td><td>1:03</td><td>1:13</td><td>1:23</td><td>1:33</td><td>1:43</td><td>1:53</td><td>2:03</td><td>2:13</td><td>2:23</td><td>2:33</td><td>2:43</td><td>2:53</td><td>3:03</td><td>3:13</td><td>3:23</td><td>3:33</td><td>3:43</td><td>3:53</td><td>4:03</td><td>4:13</td><td>4:23</td><td>4:33</td></tr>
+<tr><td class="km">24</td><td class="zone">103</td><td class="stop-name">Wieczysta</td><td>0:24</td><td>0:34</td><td>0:44</td><td>0:54</td><td>1:04</td><td>1:14</td><td>1:24</td><td>1:34</td><td>1:44</td><td>1:54</td><td>2:04</td><td>2:14</td><td>2:24</td><td>2:34</td><td>2:44</td><td>2:54</td><td>3:04</td><td>3:14</td><td>3:24</td><td>3:34</td><td>3:44</td><td>3:54</td><td>4:04</td><td>4:14</td><td>4:24</td><td>4:34</td></tr>
+<tr><td class="km">25</td><td class="zone">103</td><td class="stop-name">Os. Zgody (obrat 0 min)</td><td>0:25</td><td>0:35</td><td>0:45</td><td>0:55</td><td>1:05</td><td>1:15</td><td>1:25</td><td>1:35</td><td>1:45</td><td>1:55</td><td>2:05</td><td>2:15</td><td>2:25</td><td>2:35</td><td>2:45</td><td>2:55</td><td>3:05</td><td>3:15</td><td>3:25</td><td>3:35</td><td>3:45</td><td>3:55</td><td>4:05</td><td>4:15</td><td>4:25</td><td>4:35</td></tr>
+</tbody>
 </table>
 </div>
-<!-- Směr ZPĚT -->
+<!-- SMĚR ZPĚT -->
 <div class="section-title">Směr: Os. Zgody / Kochłowice ➔ Lotnisko</div>
 <div class="table-wrapper">
-<table id="table-inbound">
-<!-- Dynamicky generováno pro kompletní spoje od 0:00 do 22:00 -->
+<table>
+<thead>
+<tr>
+<th style="width: 25px;">km</th>
+<th style="width: 30px;">Zóna</th>
+<th class="sticky-col">Zastávka</th>
+<th>2</th><th class="tag-short">4 (K)</th><th>6</th><th>8</th><th>10</th><th>12</th><th class="tag-short">14 (K)</th><th>16</th><th>18</th><th>20</th><th>22</th><th class="tag-short">24 (K)</th><th>26</th><th>28</th><th>30</th><th>32</th><th class="tag-short">34 (K)</th><th>36</th><th>38</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="km">0</td><td class="zone">103</td><td class="stop-name">Os. Zgody (obrat 0 min)</td><td>0:00</td><td>--</td><td>0:10</td><td>0:20</td><td>0:30</td><td>0:40</td><td>--</td><td>1:00</td><td>1:10</td><td>1:20</td><td>1:30</td><td>--</td><td>2:00</td><td>2:10</td><td>2:20</td><td>2:30</td><td>--</td><td>3:00</td><td>3:10</td></tr>
+<tr><td class="km">1</td><td class="zone">103</td><td class="stop-name">Wieczysta</td><td>0:01</td><td>--</td><td>0:11</td><td>0:21</td><td>0:31</td><td>0:41</td><td>--</td><td>1:01</td><td>1:11</td><td>1:21</td><td>1:31</td><td>--</td><td>2:01</td><td>2:11</td><td>2:21</td><td>2:31</td><td>--</td><td>3:01</td><td>3:11</td></tr>
+<tr><td class="km">2</td><td class="zone">103</td><td class="stop-name">Mrozka</td><td>0:02</td><td>--</td><td>0:12</td><td>0:22</td><td>0:32</td><td>0:42</td><td>--</td><td>1:02</td><td>1:12</td><td>1:22</td><td>1:32</td><td>--</td><td>2:02</td><td>2:12</td><td>2:22</td><td>2:32</td><td>--</td><td>3:02</td><td>3:12</td></tr>
+<tr><td class="km">4</td><td class="zone">103</td><td class="stop-name">Warsawska</td><td>0:04</td><td>--</td><td>0:14</td><td>0:24</td><td>0:34</td><td>0:44</td><td>--</td><td>1:04</td><td>1:14</td><td>1:24</td><td>1:34</td><td>--</td><td>2:04</td><td>2:14</td><td>2:24</td><td>2:34</td><td>--</td><td>3:04</td><td>3:14</td></tr>
+<tr><td class="km">5</td><td class="zone">102</td><td class="stop-name">Blachownia PKP</td><td>0:05</td><td>--</td><td>0:15</td><td>0:25</td><td>0:35</td><td>0:45</td><td>--</td><td>1:05</td><td>1:15</td><td>1:25</td><td>1:35</td><td>--</td><td>2:05</td><td>2:15</td><td>2:25</td><td>2:35</td><td>--</td><td>3:05</td><td>3:15</td></tr>
+<tr><td class="km">6</td><td class="zone">102</td><td class="stop-name">Blachownia</td><td>0:06</td><td>--</td><td>0:16</td><td>0:26</td><td>0:36</td><td>0:46</td><td>--</td><td>1:06</td><td>1:16</td><td>1:26</td><td>1:36</td><td>--</td><td>2:06</td><td>2:16</td><td>2:26</td><td>2:36</td><td>--</td><td>3:06</td><td>3:16</td></tr>
+<tr><td class="km">8</td><td class="zone">102</td><td class="stop-name">Rynek Glowny</td><td>0:08</td><td>--</td><td>0:18</td><td>0:28</td><td>0:38</td><td>0:48</td><td>--</td><td>1:08</td><td>1:18</td><td>1:28</td><td>1:38</td><td>--</td><td>2:08</td><td>2:18</td><td>2:28</td><td>2:38</td><td>--</td><td>3:08</td><td>3:18</td></tr>
+<tr><td class="km">12</td><td class="zone">101</td><td class="stop-name">Dworcowa</td><td>0:12</td><td>--</td><td>0:22</td><td>0:32</td><td>0:42</td><td>0:52</td><td>--</td><td>1:12</td><td>1:22</td><td>1:32</td><td>1:42</td><td>--</td><td>2:12</td><td>2:22</td><td>2:32</td><td>2:42</td><td>--</td><td>3:12</td><td>3:22</td></tr>
+<tr class="note-row"><td class="km">14</td><td class="zone">101</td><td class="stop-name">Kochłowice</td><td>0:14</td><td>0:00</td><td>0:24</td><td>0:34</td><td>0:44</td><td>0:54</td><td>1:00</td><td>1:14</td><td>1:24</td><td>1:34</td><td>1:44</td><td>2:00</td><td>2:14</td><td>2:24</td><td>2:34</td><td>2:44</td><td>3:00</td><td>3:14</td><td>3:24</td></tr>
+<tr><td class="km">16</td><td class="zone">101</td><td class="stop-name">Witosa</td><td>0:16</td><td>0:02</td><td>0:26</td><td>0:36</td><td>0:46</td><td>0:56</td><td>1:02</td><td>1:16</td><td>1:26</td><td>1:36</td><td>1:46</td><td>2:02</td><td>2:16</td><td>2:26</td><td>2:36</td><td>2:46</td><td>3:02</td><td>3:16</td><td>3:26</td></tr>
+<tr><td class="km">18</td><td class="zone">100</td><td class="stop-name">Rzedzin</td><td>0:18</td><td>0:04</td><td>0:28</td><td>0:38</td><td>0:48</td><td>0:58</td><td>1:04</td><td>1:18</td><td>1:28</td><td>1:38</td><td>1:48</td><td>2:04</td><td>2:18</td><td>2:28</td><td>2:38</td><td>2:48</td><td>3:04</td><td>3:18</td><td>3:28</td></tr>
+<tr><td class="km">19</td><td class="zone">100</td><td class="stop-name">Rzedzin Petla</td><td>0:19</td><td>0:05</td><td>0:29</td><td>0:39</td><td>0:49</td><td>0:59</td><td>1:05</td><td>1:19</td><td>1:29</td><td>1:39</td><td>1:49</td><td>2:05</td><td>2:19</td><td>2:29</td><td>2:39</td><td>2:49</td><td>3:05</td><td>3:19</td><td>3:29</td></tr>
+<tr><td class="km">21</td><td class="zone">100</td><td class="stop-name">Slaska</td><td>0:21</td><td>0:07</td><td>0:31</td><td>0:41</td><td>0:51</td><td>1:01</td><td>1:07</td><td>1:21</td><td>1:31</td><td>1:41</td><td>1:51</td><td>2:07</td><td>2:21</td><td>2:31</td><td>2:41</td><td>2:51</td><td>3:07</td><td>3:21</td><td>3:31</td></tr>
+<tr><td class="km">25</td><td class="zone">100</td><td class="stop-name">Lotnisko (pauza 10 min)</td><td>0:25</td><td>0:11</td><td>0:35</td><td>0:45</td><td>0:55</td><td>1:05</td><td>1:11</td><td>1:25</td><td>1:35</td><td>1:45</td><td>1:55</td><td>2:11</td><td>2:25</td><td>2:35</td><td>2:45</td><td>2:55</td><td>3:11</td><td>3:25</td><td>3:35</td></tr>
+</tbody>
 </table>
 </div>
 <!-- Info Box -->
 <div class="info-box">
 <strong>Provozní informace a vysvětlivky:</strong>
 <ul>
-<li><span class="tag-short">K</span> – Vybrané zkrácené spoje v trase <strong>Kochłowice ⇄ Lotnisko</strong> (odjezdy v celou hodinu z Kochłowic).</li>
-<li><strong>Mobilní zobrazení:</strong> Posouvejte tabulku do boku. První sloupec s názvy zastávek zůstává ukotven.</li>
-<li><strong>Pauzy:</strong> Lotnisko = 10 min, Os. Zgody = 0 min.</li>
+<li><span class="tag-short">K</span> – Vybrané zkrácené spoje v trase <strong>Kochłowice ⇄ Lotnisko</strong> (začínají na zastávce Kochłowice v celou hodinu).</li>
+<li><strong>Mobilní prohlížení:</strong> Tabulku lze vodorovně posouvat prstem. Levý sloupec se zastávkami zůstává stále viditelný.</li>
+<li><strong>Pauzy:</strong> Lotnisko = 10 minut, Os. Zgody = 0 minut.</li>
 </ul>
 </div>
 </div>
-<script>
-function pad(num) {
-return num.toString().padStart(2, '0');
-}
-function formatTime(minutes) {
-if (minutes === null || minutes === undefined) return '--';
-let h = Math.floor(minutes / 60) % 24;
-let m = minutes % 60;
-return ⁠${h}:${pad(m)}⁠;
-}
-// Generování spojů pro směr TAM (Lotnisko -> Os. Zgody)
-const outboundStops = [
-{ km: 0, zone: 100, name: "Lotnisko (pauza 10 min)", offset: 0 },
-{ km: 2, zone: 100, name: "Slaska", offset: 2 },
-{ km: 4, zone: 100, name: "Rzedzin Petla", offset: 4 },
-{ km: 5, zone: 100, name: "Rzedzin", offset: 5 },
-{ km: 7, zone: 101, name: "Witosa", offset: 7 },
-{ km: 9, zone: 101, name: "Kochłowice", offset: 9 },
-{ km: 11, zone: 101, name: "Dworcowa", offset: 11 },
-{ km: 13, zone: 101, name: "Tram Depot", offset: 13 },
-{ km: 15, zone: 102, name: "Os. 30 Lecia", offset: 15 },
-{ km: 17, zone: 102, name: "Rynek Glowny", offset: 17 },
-{ km: 19, zone: 102, name: "Blachownia", offset: 19 },
-{ km: 20, zone: 102, name: "Blachownia PKP", offset: 20 },
-{ km: 21, zone: 103, name: "Warsawska", offset: 21 },
-{ km: 23, zone: 103, name: "Mrozka", offset: 23 },
-{ km: 24, zone: 103, name: "Wieczysta", offset: 24 },
-{ km: 25, zone: 103, name: "Os. Zgody (obrat 0 min)", offset: 25 }
-];
-// Generování spojů pro směr ZPĚT (Os. Zgody -> Lotnisko)
-const inboundStops = [
-{ km: 0, zone: 103, name: "Os. Zgody (obrat 0 min)", offset: 0 },
-{ km: 1, zone: 103, name: "Wieczysta", offset: 1 },
-{ km: 2, zone: 103, name: "Mrozka", offset: 2 },
-{ km: 4, zone: 103, name: "Warsawska", offset: 4 },
-{ km: 5, zone: 102, name: "Blachownia PKP", offset: 5 },
-{ km: 6, zone: 102, name: "Blachownia", offset: 6 },
-{ km: 8, zone: 102, name: "Rynek Glowny", offset: 8 },
-{ km: 12, zone: 101, name: "Dworcowa", offset: 12 },
-{ km: 14, zone: 101, name: "Kochłowice", offset: 14 },
-{ km: 16, zone: 101, name: "Witosa", offset: 16 },
-{ km: 18, zone: 100, name: "Rzedzin", offset: 18 },
-{ km: 19, zone: 100, name: "Rzedzin Petla", offset: 19 },
-{ km: 21, zone: 100, name: "Slaska", offset: 21 },
-{ km: 25, zone: 100, name: "Lotnisko (pauza 10 min)", offset: 25 }
-];
-function buildTimetable(tableId, stops, isOutbound) {
-let trips = [];
-let tripId = 1;
-// Generování běžných i zkrácených spojů od 0:00 do 22:00
-for (let time = 0; time <= 22 * 60; time += 10) {
-// Vybrané zkrácené spoje (každou 2. hodinu v celou) - trasa Kochłowice -> Lotnisko
-if (!isOutbound && time % 120 === 0 && time <= 22 * 60) {
-trips.push({
-id: tripId++,
-isShort: true,
-startTime: time,
-type: 'K'
-});
-}
-trips.push({
-id: tripId++,
-isShort: false,
-startTime: time,
-type: ''
-});
-}
-let html = '<thead><tr>';
-html += '<th style="width: 25px;">km</th>';
-html += '<th style="width: 30px;">Zóna</th>';
-html += '<th class="sticky-col">Zastávka</th>';
-trips.forEach(t => {
-let tag = t.isShort ? ' class="tag-short"' : '';
-html += ⁠<th${tag}>${t.id}${t.isShort ? ' (K)' : ''}</th>⁠;
-});
-html += '</tr><tr class="note-row"><td colspan="2">Spoj</td><td class="sticky-col note-row">Poznámka spoje</td>';
-trips.forEach(t => {
-html += ⁠<td>${t.type}</td>⁠;
-});
-html += '</tr></thead><tbody>';
-stops.forEach(stop => {
-html += ⁠<tr><td class="km">${stop.km}</td><td class="zone">${stop.zone}</td><td class="stop-name">${stop.name}</td>⁠;
-trips.forEach(t => {
-let cellTime = null;
-if (t.isShort) {
-// Zkrácená verze začíná na zastávce Kochłowice
-if (stop.offset >= 14) {
-cellTime = t.startTime + (stop.offset - 14);
-}
-} else {
-cellTime = t.startTime + stop.offset;
-}
-html += ⁠<td>${formatTime(cellTime)}</td>⁠;
-});
-html += '</tr>';
-});
-html += '</tbody>';
-document.getElementById(tableId).innerHTML = html;
-}
-buildTimetable('table-outbound', outboundStops, true);
-buildTimetable('table-inbound', inboundStops, false);
-</script>
 </body>
 </html>
