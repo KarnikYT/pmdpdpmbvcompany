@@ -1,1 +1,303 @@
+<!DOCTYPE html>
+<html lang="cs" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPMB & PMDP vCompany - Nid's Buses & Trams</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pmdp: {
+                            DEFAULT: '#009640', // Plzeňská zelená
+                            light: '#10b981',
+                            dark: '#047857'
+                        },
+                        dpmb: {
+                            DEFAULT: '#e11d48', // Brněnská červená
+                            light: '#f43f5e',
+                            dark: '#be123c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Custom subtle shadow & glass effects */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #e11d48 0%, #10b981 100%);
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-hover:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo & Title -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl hero-gradient flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                    <i class="fa-solid font-bold text-lg fa-bus-simple"></i>
+                </div>
+                <div>
+                    <h1 class="text-base font-bold leading-tight flex items-center gap-1.5">
+                        <span class="text-dpmb font-extrabold">DPMB</span> 
+                        <span class="text-slate-300 dark:text-slate-600">&amp;</span> 
+                        <span class="text-pmdp font-extrabold">PMDP</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">vCompany v Nid's Buses &amp; Trams</p>
+                </div>
+            </div>
+
+            <!-- Header Right Actions -->
+            <div class="flex items-center space-x-2">
+                <!-- Dark Mode Toggle Button -->
+                <button id="themeToggle" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Přepnout tmavý režim">
+                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 space-y-6">
+
+        <!-- Hero Section (Gradient Card inspired by MHD Opava Next) -->
+        <section class="relative overflow-hidden rounded-3xl hero-gradient p-6 md:p-8 text-white shadow-xl shadow-rose-500/10">
+            <!-- Background Decorative Icons -->
+            <div class="absolute -right-6 -bottom-6 text-white/10 text-9xl pointer-events-none select-none">
+                <i class="fa-solid fa-train-tram"></i>
+            </div>
+            
+            <div class="relative z-10 max-w-lg">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold mb-3">
+                    <span>Vítejte na palubě! 👋</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-2">
+                    Kam to dnes bude?
+                </h2>
+                <p class="text-white/90 text-sm md:text-base font-normal mb-5 leading-relaxed">
+                    Oficiální portál virtuálního dopravního podniku DPMB a PMDP v Roblox hře Nid's Buses &amp; Trams.
+                </p>
+
+                <!-- Search / Quick Filter Bar -->
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="Vyhledat sekci (vozy, linky, mapa...)..." 
+                        class="w-full pl-10 pr-4 py-3 rounded-2xl bg-white text-slate-800 placeholder-slate-400 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-500">
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Navigation Cards Grid -->
+        <section>
+            <h3 class="text-xs uppercase tracking-wider font-bold text-slate-400 dark:text-slate-500 mb-3 px-1">
+                Hlavní nabídka
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="cardsContainer">
+
+                <!-- 1. Vozy -->
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/vozidla" class="nav-card glass-card rounded-2xl p-4 flex items-start space-x-4 card-hover group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-100 dark:bg-rose-950/50 text-dpmb dark:text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bus text-xl"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-base group-hover:text-dpmb transition-colors truncate">Vozy</h4>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                            Přehled vozového parku, autobusů, trolejbusů a tramvají.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- 2. Linky -->
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/linky" class="nav-card glass-card rounded-2xl p-4 flex items-start space-x-4 card-hover group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/50 text-pmdp dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-route text-xl"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-base group-hover:text-pmdp transition-colors truncate">Linky</h4>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                            Trasy, linková vedení a jízdní sešity našich spojů.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- 3. Mapy -->
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/mapy" class="nav-card glass-card rounded-2xl p-4 flex items-start space-x-4 card-hover group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-map-location-dot text-xl"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-base group-hover:text-amber-600 transition-colors truncate">Mapy</h4>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                            Schémata sítí, orientační plány a provozní mapy.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- 4. Discord -->
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/" class="nav-card glass-card rounded-2xl p-4 flex items-start space-x-4 card-hover group cursor-pointer">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-discord text-xl"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-base group-hover:text-indigo-600 transition-colors truncate">Discord</h4>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                            Komunitní server, dispečink a hlavní komunikace.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- 5. Recruitment -->
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/recruitment" class="nav-card glass-card sm:col-span-2 rounded-2xl p-4 flex items-start space-x-4 card-hover group cursor-pointer border-rose-200/50 dark:border-rose-900/30">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-md shadow-rose-500/20">
+                        <i class="fa-solid fa-user-plus text-xl"></i>
+                    </div>
+                    <div class="flex-grow min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-base group-hover:text-dpmb transition-colors truncate">Nábor (Recruitment)</h4>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            Přidej se do našeho týmu! Hledáme nové řidiče, dispečery a členy personálu.
+                        </p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Informational Banner -->
+        <section class="glass-card rounded-2xl p-4 flex items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-pmdp flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-circle-info text-base"></i>
+                </div>
+                <div>
+                    <h5 class="text-xs font-bold text-slate-800 dark:text-slate-200">Hrajete na Robloxu?</h5>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400">Hrejte Nid's Buses &amp; Trams a připojte se k naší vCompany!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200/80 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-4xl mx-auto px-4 space-y-2">
+            <div class="flex justify-center items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="font-medium text-slate-700 dark:text-slate-300">DPMB &amp; PMDP vCompany</span>
+            </div>
+            <p>Vytvořeno pro hru Roblox – Nid's Buses &amp; Trams.</p>
+            <p class="text-[10px] text-slate-400 dark:text-slate-600">&copy; 2026 DPMB &amp; PMDP vCompany. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic JS -->
+    <script>
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        // Check stored theme or prefers-color-scheme
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            htmlElement.classList.remove('dark');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // Search Filter for Cards
+        const searchInput = document.getElementById('searchInput');
+        const navCards = document.querySelectorAll('.nav-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            navCards.forEach(card => {
+                const textContent = card.textContent.toLowerCase();
+                if (textContent.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
