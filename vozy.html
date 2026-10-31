@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="cs" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vozidla - DPMB & PMDP vCompany</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pmdp: {
+                            DEFAULT: '#009845', // Plzeňská zelená
+                            light: '#10b981',
+                            dark: '#047857'
+                        },
+                        dpmb: {
+                            DEFAULT: '#E30613', // Brněnská červená
+                            light: '#f43f5e',
+                            dark: '#be123c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #E30613 0%, #009845 100%);
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/" class="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Zpět na hlavní stranu">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </a>
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-9 h-9 rounded-2xl hero-gradient flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                        <i class="fa-solid font-bold text-sm fa-bus"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-sm font-bold leading-tight flex items-center gap-1">
+                            <span class="text-dpmb font-extrabold">DPMB</span> 
+                            <span class="text-slate-300 dark:text-slate-600">&amp;</span> 
+                            <span class="text-pmdp font-extrabold">PMDP</span>
+                        </h1>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Vozový park vCompany</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <button id="themeToggle" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Přepnout tmavý režim">
+                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 space-y-6">
+
+        <!-- Banner Header -->
+        <section class="relative overflow-hidden rounded-3xl hero-gradient p-6 text-white shadow-xl shadow-rose-500/10">
+            <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl pointer-events-none select-none">
+                <i class="fa-solid fa-bus-simple"></i>
+            </div>
+            
+            <div class="relative z-10 max-w-md">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold mb-2">
+                    <i class="fa-solid fa-layer-group"></i> Přehled floty
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-1">
+                    Vozidla vCompany
+                </h2>
+                <p class="text-white/90 text-xs md:text-sm font-normal mb-4">
+                    Kompletní seznam dostupných autobusů a trolejbusů provozovaných v Nid's Buses &amp; Trams.
+                </p>
+
+                <!-- Live Filter Search -->
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="Hledat vůz (např. Solaris, Ikarus, 14Tr)..." 
+                        class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white text-slate-800 placeholder-slate-400 text-xs sm:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-500">
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Selector Buttons -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="categoryTabs">
+            <button data-filter="all" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-md">
+                <i class="fa-solid fa-list mr-1.5"></i>Všechna vozila (<span id="countAll">0</span>)
+            </button>
+            <button data-filter="bus" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">
+                <i class="fa-solid fa-bus mr-1.5 text-dpmb"></i>Autobusy (<span id="countBus">0</span>)
+            </button>
+            <button data-filter="tbus" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">
+                <i class="fa-solid fa-bolt mr-1.5 text-pmdp"></i>Trolejbusy (<span id="countTbus">0</span>)
+            </button>
+        </div>
+
+        <!-- Vehicle Fleet Grid -->
+        <div id="fleetGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <!-- Dynamic JS Card Injection -->
+        </div>
+
+        <!-- Empty Results Alert -->
+        <div id="noResults" class="hidden glass-card rounded-3xl p-8 text-center space-y-2">
+            <i class="fa-solid fa-bus-slash text-4xl text-slate-400"></i>
+            <h3 class="font-bold text-base text-slate-700 dark:text-slate-200">Žádné vozidlo nenalezeno</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Zkuste změnit hledaný výraz nebo vybranou kategorii.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200/80 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-4xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-700 dark:text-slate-300">DPMB &amp; PMDP vCompany – Nid's Buses &amp; Trams</p>
+            <p class="text-[10px] text-slate-400 dark:text-slate-600">&copy; 2026 DPMB &amp; PMDP vCompany. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Vehicle Database
+        const vehicles = [
+            // BUS Vehicles
+            { name: "SOR BN12", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Částečně nízkopodlažní dvounápravový autobus." },
+            { name: "SOR BN 8.5", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Městský midibus určený pro méně vytížené linky." },
+            { name: "Solaris Urbino 12 III", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Standardní 12m nízkopodlažní autobus 3. generace." },
+            { name: "Solaris Urbino 12 IV", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Moderní 12m nízkopodlažní autobus 4. generace (New Urbino)." },
+            { name: "Solaris Urbino 15 II", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Tříosý 15m velkokapacitní nízkopodlažní autobus." },
+            { name: "Solaris Urbino 18 III", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Kloubový 18m nízkopodlažní autobus 3. generace." },
+            { name: "Solaris Urbino 18 IV", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Moderní kloubový 18m nízkopodlažní autobus 4. generace." },
+            { name: "Karosa B951E", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Klasický vysokopodlažní městský autobus." },
+            { name: "Ikarus 260.01", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Legendární maďarský sólo vysokopodlažní autobus." },
+            { name: "Ikarus 260.37", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Městská varianta legendárního autobusu Ikarus 260." },
+            { name: "Ikarus 280.01", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Kloubový vysokopodlažní autobus s velkou kapacitou." },
+            { name: "Ikarus 280.37", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Modernizovaná verze kloubového autobusu Ikarus 280." },
+            { name: "Renault Citybus 12M", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "První plně nízkopodlažní městský autobus." },
+            { name: "Renault Citybus 18M", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Kloubový nízkopodlažní 18m autobus." },
+            { name: "MAN Lion’s City A21", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Standardní nízkopodlažní městský autobus od značky MAN." },
+            { name: "Mercedes-Benz O530 Citaro", category: "bus", tag: "Autobus", icon: "fa-bus", desc: "Oblíbený nízkopodlažní německý městský autobus." },
+
+            // T-BUS Vehicles
+            { name: "Škoda 14Tr", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Legenda československých městských trolejbusových tratí." },
+            { name: "Škoda 26Tr Solaris", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Dvounápravový nízkopodlažní trolejbus s karoserií Solaris." },
+            { name: "Škoda 27Tr Solaris", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Kloubový 18m nízkopodlažní trolejbus." },
+            { name: "Škoda 28Tr Solaris", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Tříosý 15m velkokapacitní trolejbus." },
+            { name: "ZiU-9", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Klasický sovětský vysokopodlažní trolejbus." },
+            { name: "ZiU-11.1", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Zkrácená verze trolejbusu ZiU pro méně vytížené linky." },
+            { name: "ZiU-11", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Městský trolejbus z produkce fabriky ZiU." },
+            { name: "Solaris Trollino 12 IV", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Moderní 12m nízkopodlažní trolejbus 4. generace." },
+            { name: "Solaris Trollino 18 IV", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Moderní kloubový 18m trolejbus 4. generace." },
+            { name: "Ikarus 280T", category: "tbus", tag: "Trolejbus", icon: "fa-bolt", desc: "Kloubový trolejbus postavený na karoserii Ikarus 280." }
+        ];
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // DOM elements
+        const fleetGrid = document.getElementById('fleetGrid');
+        const noResults = document.getElementById('noResults');
+        const searchInput = document.getElementById('searchInput');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        let currentFilter = 'all';
+
+        // Update counts
+        document.getElementById('countAll').textContent = vehicles.length;
+        document.getElementById('countBus').textContent = vehicles.filter(v => v.category === 'bus').length;
+        document.getElementById('countTbus').textContent = vehicles.filter(v => v.category === 'tbus').length;
+
+        // Render fleet cards
+        function renderFleet() {
+            const query = searchInput.value.toLowerCase().trim();
+            fleetGrid.innerHTML = '';
+
+            const filtered = vehicles.filter(v => {
+                const matchesFilter = (currentFilter === 'all') || (v.category === currentFilter);
+                const matchesQuery = v.name.toLowerCase().includes(query) || v.desc.toLowerCase().includes(query);
+                return matchesFilter && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                filtered.forEach(v => {
+                    const isBus = v.category === 'bus';
+                    const badgeBg = isBus ? 'bg-rose-100 text-dpmb dark:bg-rose-950/50 dark:text-rose-400' : 'bg-emerald-100 text-pmdp dark:bg-emerald-950/50 dark:text-emerald-400';
+                    const iconBg = isBus ? 'bg-rose-500/10 text-dpmb' : 'bg-emerald-500/10 text-pmdp';
+
+                    const card = document.createElement('div');
+                    card.className = 'glass-card rounded-2xl p-4 flex items-center space-x-3.5 card-hover';
+                    card.innerHTML = `
+                        <div class="w-11 h-11 rounded-2xl ${iconBg} flex items-center justify-center shrink-0">
+                            <i class="fa-solid ${v.icon} text-lg"></i>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <div class="flex items-center justify-between gap-2 mb-0.5">
+                                <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm truncate">${v.name}</h3>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-extrabold uppercase shrink-0 ${badgeBg}">${v.tag}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">${v.desc}</p>
+                        </div>
+                    `;
+                    fleetGrid.appendChild(card);
+                });
+            }
+        }
+
+        // Tab click events
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => {
+                    b.className = 'tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700';
+                });
+                btn.className = 'tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-md';
+                currentFilter = btn.getAttribute('data-filter');
+                renderFleet();
+            });
+        });
+
+        // Search input event
+        searchInput.addEventListener('input', renderFleet);
+
+        // Initial render
+        renderFleet();
+    </script>
+</body>
+</html>
