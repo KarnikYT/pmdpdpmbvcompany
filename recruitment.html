@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="cs" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment - DPMB & PMDP vCompany</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pmdp: {
+                            DEFAULT: '#009845',
+                            light: '#10b981',
+                            dark: '#047857'
+                        },
+                        dpmb: {
+                            DEFAULT: '#E30613',
+                            light: '#f43f5e',
+                            dark: '#be123c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #E30613 0%, #009845 100%);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            background-color: #ffffff;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .dark .form-input, .dark .form-select {
+            border-color: #334155;
+            background-color: #1e293b;
+            color: #f8fafc;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #009845;
+            box-shadow: 0 0 0 3px rgba(0, 152, 69, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/" class="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Back to main page">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </a>
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-9 h-9 rounded-2xl hero-gradient flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                        <i class="fa-solid font-bold text-sm fa-user-plus"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-sm font-bold leading-tight flex items-center gap-1">
+                            <span class="text-dpmb font-extrabold">DPMB</span> 
+                            <span class="text-slate-300 dark:text-slate-600">&amp;</span> 
+                            <span class="text-pmdp font-extrabold">PMDP</span>
+                        </h1>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Recruitment &amp; Knowledge Check</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <button id="themeToggle" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Toggle Theme">
+                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-3xl w-full mx-auto px-4 py-6 space-y-6">
+
+        <!-- Banner Header -->
+        <section class="relative overflow-hidden rounded-3xl hero-gradient p-6 text-white shadow-xl shadow-rose-500/10">
+            <div class="absolute -right-4 -bottom-4 text-white/10 text-8xl pointer-events-none select-none">
+                <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+            
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold mb-2">
+                    <i class="fa-solid fa-graduation-cap"></i> Application &amp; Rules Test
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-1">
+                    vCompany Driver Recruitment
+                </h2>
+                <p class="text-white/90 text-xs md:text-sm font-normal">
+                    Please answer all questions accurately. The system will automatically evaluate your gamepasses and speed limit knowledge.
+                </p>
+            </div>
+        </section>
+
+        <!-- Recruitment Form Section -->
+        <section id="formSection" class="glass-card rounded-3xl p-6 shadow-md">
+            <form id="recruitmentForm" class="space-y-5">
+
+                <!-- 1. Roblox Nick -->
+                <div class="space-y-1.5">
+                    <label for="robloxNick" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                        Roblox Username <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="robloxNick" required placeholder="Enter your Roblox username" class="form-input">
+                </div>
+
+                <!-- 2. Discord Ping / User ID -->
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <label for="discordPing" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Discord handle or User ID <span class="text-rose-500">*</span>
+                        </label>
+                        <span class="text-[11px] text-slate-400">e.g. 123456789012345678 or @username</span>
+                    </div>
+                    <input type="text" id="discordPing" required placeholder="Enter your Discord ID or username" class="form-input">
+                </div>
+
+                <!-- Gamepass checks -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- 3. Paint Bucket -->
+                    <div class="space-y-1.5">
+                        <label for="paintBucket" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Do you have the Paint Bucket gamepass? <span class="text-rose-500">*</span>
+                        </label>
+                        <select id="paintBucket" required class="form-select">
+                            <option value="" disabled selected>Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <p class="text-[11px] text-amber-600 dark:text-amber-400 font-medium">⚠️ Paint Bucket is required for drivers.</p>
+                    </div>
+
+                    <!-- 4. Custom Dest -->
+                    <div class="space-y-1.5">
+                        <label for="customDest" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Do you have the Custom Dest gamepass? <span class="text-rose-500">*</span>
+                        </label>
+                        <select id="customDest" required class="form-select">
+                            <option value="" disabled selected>Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <!-- 5. Tram Gamepass -->
+                    <div class="space-y-1.5">
+                        <label for="tramGamepass" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Tram Gamepass (If driving trams) <span class="text-rose-500">*</span>
+                        </label>
+                        <select id="tramGamepass" required class="form-select">
+                            <option value="" disabled selected>Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No, I don't want to drive trams">No, I don't want to drive trams</option>
+                        </select>
+                    </div>
+
+                    <!-- 6. Metro Gamepass -->
+                    <div class="space-y-1.5">
+                        <label for="metroGamepass" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Metro Gamepass (If driving metro) <span class="text-rose-500">*</span>
+                        </label>
+                        <select id="metroGamepass" required class="form-select">
+                            <option value="" disabled selected>Select an option...</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No, I don't want to drive metro">No, I don't want to drive metro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Traffic Rules Quiz -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- 7. Speed Limit City -->
+                    <div class="space-y-1.5">
+                        <label for="maxSpeedCity" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Speed limit inside city <span class="text-rose-500">*</span>
+                        </label>
+                        <select id="maxSpeedCity" required class="form-select">
+                            <option value="" disabled selected>Select city speed limit...</option>
+                            <option value="30 km/h">30 km/h</option>
+                            <option value="50 km/h">50 km/h</option>
+                            <option value="70 km/h">70 km/h</option>
+                            <option value="90 km/h">90 km/h</option>
+                        </select>
+                    </div>
+
+                    <!-- 8. Speed Limit Outside City -->
+                    <div class="space-y-1.5">
+                        <label for="maxSpeedOutside" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                            Speed limit outside city <span class="text-rose-500">*</span>
+                        </label>
+                        <select id="maxSpeedOutside" required class="form-select">
+                            <option value="" disabled selected>Select outside speed limit...</option>
+                            <option value="50 km/h">50 km/h</option>
+                            <option value="70 km/h">70 km/h</option>
+                            <option value="90 km/h">90 km/h</option>
+                            <option value="110 km/h">110 km/h</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 9. vCompany Transport Companies -->
+                <div class="space-y-1.5">
+                    <label for="transitCompanies" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                        Which public transport companies are in our vCompany? <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="transitCompanies" required placeholder="Name the transport companies (e.g. DPMB & PMDP)" class="form-input">
+                </div>
+
+                <!-- Error Box -->
+                <div id="errorAlert" class="hidden p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-circle-exclamation text-base"></i>
+                    <span id="errorMessage">Submission failed. Please try again.</span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn" class="w-full py-3.5 px-6 rounded-2xl hero-gradient text-white font-bold text-sm shadow-lg shadow-rose-500/25 hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 cursor-pointer">
+                    <i id="submitIcon" class="fa-solid fa-paper-plane"></i>
+                    <span id="submitText">Submit Application</span>
+                </button>
+
+            </form>
+        </section>
+
+        <!-- Evaluation Results Screen -->
+        <section id="successSection" class="hidden glass-card rounded-3xl p-8 space-y-6 shadow-xl border">
+            <div class="text-center space-y-3">
+                <div id="statusIconBg" class="w-20 h-20 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                    <i id="statusIcon" class="fa-solid"></i>
+                </div>
+                <h3 id="statusTitle" class="text-2xl font-extrabold text-slate-800 dark:text-slate-100"></h3>
+                <p id="statusDescription" class="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed"></p>
+            </div>
+
+            <!-- Quiz & Verification Summary Breakdown -->
+            <div id="summaryCard" class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
+                <h4 class="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider border-b border-slate-200 dark:border-slate-700 pb-2">
+                    Automatic Verification Breakdown
+                </h4>
+                <ul id="verificationList" class="space-y-2"></ul>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/" class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-xs transition-all text-center">
+                    <i class="fa-solid fa-house mr-1"></i> Main Page
+                </a>
+                <button onclick="resetForm()" class="w-full sm:w-auto px-6 py-3 rounded-2xl hero-gradient text-white font-bold text-xs shadow-md transition-all">
+                    <i class="fa-solid fa-rotate-left mr-1"></i> Submit Another Application
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/80 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-3xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-700 dark:text-slate-300">DPMB &amp; PMDP vCompany Recruitment</p>
+            <p class="text-[10px] text-slate-400 dark:text-slate-600">&copy; 2026 DPMB &amp; PMDP vCompany. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1566056115928699006/Vz6-6029gDJCgiR0zWKBkYu58Tvq0Qhu1hdgQPf1ogIIxPlTM-iqPUCK8nOgeBYipOgU";
+
+        // Dark Mode Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        const recruitmentForm = document.getElementById('recruitmentForm');
+        const formSection = document.getElementById('formSection');
+        const successSection = document.getElementById('successSection');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitIcon = document.getElementById('submitIcon');
+        const submitText = document.getElementById('submitText');
+        const errorAlert = document.getElementById('errorAlert');
+        const errorMessage = document.getElementById('errorMessage');
+
+        recruitmentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorAlert.classList.add('hidden');
+
+            // Gather inputs
+            const robloxNick = document.getElementById('robloxNick').value.trim();
+            const discordPingInput = document.getElementById('discordPing').value.trim();
+            const paintBucket = document.getElementById('paintBucket').value;
+            const customDest = document.getElementById('customDest').value;
+            const tramGamepass = document.getElementById('tramGamepass').value;
+            const metroGamepass = document.getElementById('metroGamepass').value;
+            const maxSpeedCity = document.getElementById('maxSpeedCity').value;
+            const maxSpeedOutside = document.getElementById('maxSpeedOutside').value;
+            const transitCompanies = document.getElementById('transitCompanies').value.trim();
+
+            // Automatic Evaluation Verification
+            const checks = {
+                paintBucket: paintBucket === 'Yes',
+                citySpeed: maxSpeedCity === '50 km/h',
+                outsideSpeed: maxSpeedOutside === '90 km/h',
+                companies: transitCompanies.toLowerCase().includes('dpmb') && transitCompanies.toLowerCase().includes('pmdp')
+            };
+
+            const allPassed = checks.paintBucket && checks.citySpeed && checks.outsideSpeed && checks.companies;
+
+            // Discord Ping Format
+            let formattedPing = discordPingInput;
+            if (/^\d+$/.test(discordPingInput)) {
+                formattedPing = `<@${discordPingInput}>`;
+            }
+
+            submitBtn.disabled = true;
+            submitIcon.className = "fa-solid fa-spinner fa-spin";
+            submitText.textContent = "Evaluating & Submitting...";
+
+            // Embed Color: Green (0x2ECC71 = 3066993) for PASSED, Red (0xE74C3C = 15158332) for FAILED
+            const embedColor = allPassed ? 3066993 : 15158332;
+            const resultBadge = allPassed ? "✅ APPLICATION PASSED" : "❌ APPLICATION FAILED";
+
+            const payload = {
+                content: `${allPassed ? '🎉' : '⚠️'} **New recruitment submission from** ${formattedPing}`,
+                embeds: [
+                    {
+                        title: `📋 Recruitment Form Evaluation - ${resultBadge}`,
+                        color: embedColor,
+                        fields: [
+                            {
+                                name: "👤 Roblox Username",
+                                value: robloxNick || "N/A",
+                                inline: true
+                            },
+                            {
+                                name: "💬 Discord Contact",
+                                value: formattedPing || "N/A",
+                                inline: true
+                            },
+                            {
+                                name: "🎯 Verification Status",
+                                value: allPassed ? "🟢 **PASSED AUTOMATIC CHECK**" : "🔴 **FAILED REQUIREMENTS**",
+                                inline: true
+                            },
+                            {
+                                name: "🎨 Paint Bucket Gamepass",
+                                value: checks.paintBucket ? "✅ Yes (Owned)" : "❌ No (Required for drivers!)",
+                                inline: true
+                            },
+                            {
+                                name: "🏷️ Custom Dest Gamepass",
+                                value: customDest,
+                                inline: true
+                            },
+                            {
+                                name: "🚃 Tram Gamepass",
+                                value: tramGamepass,
+                                inline: true
+                            },
+                            {
+                                name: "🚇 Metro Gamepass",
+                                value: metroGamepass,
+                                inline: true
+                            },
+                            {
+                                name: "🏙️ City Speed Limit",
+                                value: checks.citySpeed ? "✅ 50 km/h (Correct)" : `❌ ${maxSpeedCity} (Expected: 50 km/h)`,
+                                inline: true
+                            },
+                            {
+                                name: "🛣️ Outside Speed Limit",
+                                value: checks.outsideSpeed ? "✅ 90 km/h (Correct)" : `❌ ${maxSpeedOutside} (Expected: 90 km/h)`,
+                                inline: true
+                            },
+                            {
+                                name: "🚏 Companies Answered",
+                                value: checks.companies ? `✅ "${transitCompanies}" (Correct)` : `❌ "${transitCompanies}" (Must mention DPMB & PMDP)`,
+                                inline: false
+                            }
+                        ],
+                        footer: {
+                            text: "DPMB & PMDP vCompany Automatic Evaluation"
+                        },
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok || response.status === 204) {
+                    // Render status screen
+                    formSection.classList.add('hidden');
+                    successSection.classList.remove('hidden');
+
+                    const statusIconBg = document.getElementById('statusIconBg');
+                    const statusIcon = document.getElementById('statusIcon');
+                    const statusTitle = document.getElementById('statusTitle');
+                    const statusDescription = document.getElementById('statusDescription');
+                    const verificationList = document.getElementById('verificationList');
+
+                    if (allPassed) {
+                        statusIconBg.className = "w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-500 flex items-center justify-center mx-auto text-3xl shadow-inner";
+                        statusIcon.className = "fa-solid fa-circle-check";
+                        statusTitle.textContent = "Application Passed!";
+                        statusDescription.textContent = "Congratulations! You passed all requirements and quiz questions. Your application has been logged to Discord.";
+                    } else {
+                        statusIconBg.className = "w-20 h-20 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-500 flex items-center justify-center mx-auto text-3xl shadow-inner";
+                        statusIcon.className = "fa-solid fa-circle-xmark";
+                        statusTitle.textContent = "Verification Failed";
+                        statusDescription.textContent = "Your application was submitted, but you did not meet all requirement criteria. Please review the breakdown below.";
+                    }
+
+                    verificationList.innerHTML = `
+                        <li class="flex items-center justify-between">
+                            <span>Paint Bucket Gamepass:</span>
+                            <span class="font-bold ${checks.paintBucket ? 'text-emerald-500' : 'text-rose-500'}">
+                                ${checks.paintBucket ? '✅ Owned' : '❌ Required'}
+                            </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span>City Speed Limit (50 km/h):</span>
+                            <span class="font-bold ${checks.citySpeed ? 'text-emerald-500' : 'text-rose-500'}">
+                                ${checks.citySpeed ? '✅ Correct' : `❌ Selected: ${maxSpeedCity}`}
+                            </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span>Outside Speed Limit (90 km/h):</span>
+                            <span class="font-bold ${checks.outsideSpeed ? 'text-emerald-500' : 'text-rose-500'}">
+                                ${checks.outsideSpeed ? '✅ Correct' : `❌ Selected: ${maxSpeedOutside}`}
+                            </span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span>vCompany Names (DPMB & PMDP):</span>
+                            <span class="font-bold ${checks.companies ? 'text-emerald-500' : 'text-rose-500'}">
+                                ${checks.companies ? '✅ Correct' : '❌ Incorrect / Incomplete'}
+                            </span>
+                        </li>
+                    `;
+
+                } else {
+                    throw new Error(`HTTP Error Status: ${response.status}`);
+                }
+            } catch (err) {
+                console.error("Webhook error:", err);
+                errorMessage.textContent = "Failed to send application to Discord. Please check your connection and try again.";
+                errorAlert.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitIcon.className = "fa-solid fa-paper-plane";
+                submitText.textContent = "Submit Application";
+            }
+        });
+
+        function resetForm() {
+            recruitmentForm.reset();
+            successSection.classList.add('hidden');
+            formSection.classList.remove('hidden');
+            errorAlert.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
