@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="cs" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapy &amp; Schémata linek | DPMB &amp; PMDP vCompany</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pmdp: {
+                            DEFAULT: '#10b981', // Plzeňská zelená
+                            light: '#34d399',
+                            dark: '#047857'
+                        },
+                        dpmb: {
+                            DEFAULT: '#e11d48', // Brněnská červená
+                            light: '#fb7185',
+                            dark: '#be123c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #e11d48 0%, #10b981 100%);
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Lightbox transitions */
+        .lightbox-overlay {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="https://karnikyt.github.io/pmdpdpmbvcompany/" class="w-10 h-10 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Zpět na hlavní stranu">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </a>
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-9 h-9 rounded-2xl hero-gradient flex items-center justify-center text-white shadow-md shadow-rose-500/20">
+                        <i class="fa-solid font-bold text-sm fa-map-location-dot"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-sm font-bold leading-tight flex items-center gap-1">
+                            <span class="text-dpmb font-extrabold">DPMB</span> 
+                            <span class="text-slate-300 dark:text-slate-600">&amp;</span> 
+                            <span class="text-pmdp font-extrabold">PMDP</span>
+                        </h1>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Mapy a Schémata linek</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <button id="themeToggle" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition-all focus:outline-none" aria-label="Přepnout tmavý režim">
+                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 space-y-6">
+
+        <!-- Banner Header -->
+        <section class="relative overflow-hidden rounded-3xl hero-gradient p-6 md:p-8 text-white shadow-xl shadow-rose-500/10">
+            <div class="absolute -right-4 -bottom-4 text-white/10 text-9xl pointer-events-none select-none">
+                <i class="fa-solid fa-map"></i>
+            </div>
+            
+            <div class="relative z-10 max-w-lg">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold mb-2">
+                    <i class="fa-solid fa-compass"></i> Orientační plán sítě
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mb-1">
+                    Mapy &amp; Schémata linek
+                </h2>
+                <p class="text-white/90 text-xs md:text-sm font-normal mb-4">
+                    Prohlížejte a stahujte si provozní mapy, plánky linek a schémata vozoven pro Nid's Buses &amp; Trams.
+                </p>
+
+                <!-- Live Search Bar -->
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="searchInput" placeholder="Hledat mapu podle názvu nebo souboru..." 
+                        class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white text-slate-800 placeholder-slate-400 text-xs sm:text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-500">
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="categoryTabs">
+            <button data-filter="all" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-md shrink-0">
+                <i class="fa-solid fa-globe mr-1.5"></i>Všechny mapy (<span id="countAll">8</span>)
+            </button>
+            <button data-filter="celkove" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 shrink-0">
+                <i class="fa-solid fa-map-marked-alt mr-1.5 text-indigo-500"></i>Celkové mapy
+            </button>
+            <button data-filter="dpmb" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 shrink-0">
+                <i class="fa-solid fa-bus mr-1.5 text-dpmb"></i>DPMB Brno
+            </button>
+            <button data-filter="pmdp" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 shrink-0">
+                <i class="fa-solid fa-route mr-1.5 text-pmdp"></i>PMDP Plzeň
+            </button>
+            <button data-filter="schemata" class="tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 shrink-0">
+                <i class="fa-solid fa-diagram-project mr-1.5 text-amber-500"></i>Schémata
+            </button>
+        </div>
+
+        <!-- Maps Grid Gallery -->
+        <div id="mapsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Dynamically Rendered Map Cards -->
+        </div>
+
+        <!-- No Results Alert -->
+        <div id="noResults" class="hidden glass-card rounded-3xl p-8 text-center space-y-2">
+            <i class="fa-solid fa-map-location text-4xl text-slate-400"></i>
+            <h3 class="font-bold text-base text-slate-700 dark:text-slate-200">Žádná mapa nenalezena</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Zkuste změnit vyhledávací dotaz nebo vybranou kategorii.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200/80 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-5xl mx-auto px-4 space-y-2">
+            <p class="font-medium text-slate-700 dark:text-slate-300">DPMB &amp; PMDP vCompany – Nid's Buses &amp; Trams</p>
+            <p class="text-[10px] text-slate-400 dark:text-slate-600">&copy; 2026 DPMB &amp; PMDP vCompany. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Lightbox Modal -->
+    <div id="lightbox" class="lightbox-overlay fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl flex flex-col justify-between p-4 opacity-0 pointer-events-none invisible">
+        
+        <!-- Lightbox Top Control Bar -->
+        <div class="flex items-center justify-between text-white z-10">
+            <div class="flex items-center space-x-3">
+                <span id="lbBadge" class="text-[10px] px-2.5 py-1 rounded-full font-bold uppercase bg-emerald-500"></span>
+                <div>
+                    <h3 id="lbTitle" class="text-sm md:text-base font-bold text-white leading-tight"></h3>
+                    <p id="lbFilename" class="text-[11px] text-slate-400 font-mono"></p>
+                </div>
+            </div>
+
+            <!-- Toolbar Buttons -->
+            <div class="flex items-center space-x-2">
+                <button id="btnZoomIn" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all" title="Přiblížit">
+                    <i class="fa-solid fa-magnifying-glass-plus text-sm"></i>
+                </button>
+                <button id="btnZoomOut" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all" title="Oddálit">
+                    <i class="fa-solid fa-magnifying-glass-minus text-sm"></i>
+                </button>
+                <button id="btnResetZoom" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all" title="Obnovit velikost">
+                    <i class="fa-solid fa-rotate-left text-sm"></i>
+                </button>
+                <a id="btnDownload" href="#" download class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all" title="Stáhnout obrázek">
+                    <i class="fa-solid fa-download text-sm"></i>
+                </a>
+                <button id="btnCloseLb" class="w-9 h-9 rounded-xl bg-rose-500/80 hover:bg-rose-600 flex items-center justify-center transition-all ml-2" title="Zavřít">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Lightbox Main Image Canvas Container -->
+        <div class="relative flex-grow flex items-center justify-center overflow-hidden my-2 select-none">
+            <!-- Navigation Arrow Left -->
+            <button id="btnPrev" class="absolute left-2 z-20 w-11 h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-all backdrop-blur-md">
+                <i class="fa-solid fa-chevron-left text-base"></i>
+            </button>
+
+            <!-- Image Viewport -->
+            <div id="imgWrapper" class="cursor-grab flex items-center justify-center w-full h-full">
+                <img id="lbImg" src="" alt="Mapa" class="max-h-full max-w-full object-contain rounded-lg transition-transform duration-200 ease-out shadow-2xl">
+            </div>
+
+            <!-- Navigation Arrow Right -->
+            <button id="btnNext" class="absolute right-2 z-20 w-11 h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-all backdrop-blur-md">
+                <i class="fa-solid fa-chevron-right text-base"></i>
+            </button>
+        </div>
+
+        <!-- Lightbox Bottom Bar -->
+        <div class="flex items-center justify-between text-xs text-slate-400 z-10 px-2">
+            <span id="lbCounter">1 / 8</span>
+            <span class="hidden sm:inline">Použijte kolečko myši pro přiblížení nebo šipky pro klávesnici.</span>
+        </div>
+    </div>
+
+    <!-- Gallery Script -->
+    <script>
+        // Database of Maps
+        const mapsData = [
+            { id: 1, file: "Untitled60_20261028104016.jpeg", title: "Celková mapa sítě", category: "celkove", badge: "Celková mapa", desc: "Kompletní schéma autobusových a trolejbusových linek." },
+            { id: 2, file: "Untitled59_20261028103910.jpeg", title: "Schéma DPMB Brno", category: "dpmb", badge: "DPMB Brno", desc: "Linkové vedení brněnských autobusů v vCompany." },
+            { id: 3, file: "Untitled58_20261028103803.jpeg", title: "Schéma PMDP Plzeň", category: "pmdp", badge: "PMDP Plzeň", desc: "Plán sítě plzeňských tratí a spojů." },
+            { id: 4, file: "Untitled57_20261028103709.jpeg", title: "Mapa trolejbusových linek", category: "schemata", badge: "Schéma", desc: "Trolejbusové trasy a napájecí úseky." },
+            { id: 5, file: "Untitled56_20261028103502.jpeg", title: "Mapa příměstských linek", category: "celkove", badge: "Celková mapa", desc: "Regionální a příměstské spoje." },
+            { id: 6, file: "Untitled55_20261028103101.jpeg", title: "Nocní linkové schéma", category: "schemata", badge: "Schéma", desc: "Plán nočního provozu pro DPMB a PMDP." },
+            { id: 7, file: "IMG_6765.jpeg", title: "Detailní plán vozoven", category: "dpmb", badge: "DPMB Brno", desc: "Dispoziční plán garáží a výjezdy." },
+            { id: 8, file: "IMG_6764.jpeg", title: "Orientační mapa zastávek", category: "pmdp", badge: "PMDP Plzeň", desc: "Detailní seznam zastávek a uzlů." }
+        ];
+
+        // Placeholder Canvas Generator for missing local files
+        function createPlaceholderDataUrl(title, filename) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            // Gradient background
+            const grad = ctx.createLinearGradient(0, 0, 800, 500);
+            grad.addColorStop(0, '#0f172a');
+            grad.addColorStop(0.5, '#1e293b');
+            grad.addColorStop(1, '#009845');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 800, 500);
+
+            // Grid lines overlay
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+            ctx.lineWidth = 2;
+            for (let x = 0; x < 800; x += 40) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 500); ctx.stroke();
+            }
+            for (let y = 0; y < 500; y += 40) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(800, y); ctx.stroke();
+            }
+
+            // Decorative map line
+            ctx.strokeStyle = '#e11d48';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(100, 400); ctx.lineTo(300, 200); ctx.lineTo(500, 300); ctx.lineTo(700, 100);
+            ctx.stroke();
+
+            // Text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 28px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(title, 400, 230);
+
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '16px Inter, sans-serif';
+            ctx.fillText(filename, 400, 270);
+
+            return canvas.toDataURL('image/jpeg');
+        }
+
+        // Dark mode logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // DOM elements
+        const mapsGrid = document.getElementById('mapsGrid');
+        const noResults = document.getElementById('noResults');
+        const searchInput = document.getElementById('searchInput');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+
+        let currentFilter = 'all';
+        let filteredMaps = [...mapsData];
+
+        // Render Gallery Cards
+        function renderGallery() {
+            const query = searchInput.value.toLowerCase().trim();
+            mapsGrid.innerHTML = '';
+
+            filteredMaps = mapsData.filter(m => {
+                const matchesFilter = (currentFilter === 'all') || (m.category === currentFilter);
+                const matchesQuery = m.title.toLowerCase().includes(query) || m.file.toLowerCase().includes(query) || m.desc.toLowerCase().includes(query);
+                return matchesFilter && matchesQuery;
+            });
+
+            if (filteredMaps.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                filteredMaps.forEach((mapItem, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col card-hover cursor-pointer group';
+                    
+                    const srcUrl = `images/Mapy/${mapItem.file}`;
+
+                    let badgeColor = 'bg-slate-500';
+                    if (mapItem.category === 'dpmb') badgeColor = 'bg-dpmb';
+                    if (mapItem.category === 'pmdp') badgeColor = 'bg-pmdp';
+                    if (mapItem.category === 'celkove') badgeColor = 'bg-indigo-600';
+                    if (mapItem.category === 'schemata') badgeColor = 'bg-amber-600';
+
+                    card.innerHTML = `
+                        <div class="relative h-44 bg-slate-200 dark:bg-slate-800 overflow-hidden flex items-center justify-center">
+                            <img src="${srcUrl}" alt="${mapItem.title}" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                onerror="this.onerror=null; this.src='${createPlaceholderDataUrl(mapItem.title, mapItem.file)}';">
+                            <span class="absolute top-2.5 left-2.5 text-[10px] px-2.5 py-1 rounded-full font-extrabold uppercase text-white ${badgeColor} shadow-md">
+                                ${mapItem.badge}
+                            </span>
+                            <div class="absolute inset-0 bg-slate-950/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-sm font-bold gap-2">
+                                <i class="fa-solid fa-expand"></i> Otevřít
+                            </div>
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100 group-hover:text-emerald-500 transition-colors line-clamp-1">${mapItem.title}</h3>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">${mapItem.desc}</p>
+                            <div class="mt-auto pt-3 flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-slate-200/60 dark:border-slate-800">
+                                <span class="truncate">${mapItem.file}</span>
+                                <i class="fa-solid fa-arrow-right text-xs text-emerald-500"></i>
+                            </div>
+                        </div>
+                    `;
+
+                    card.addEventListener('click', () => openLightbox(idx));
+                    mapsGrid.appendChild(card);
+                });
+            }
+        }
+
+        // Filter Button Tabs Click
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => {
+                    b.className = 'tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 shrink-0';
+                });
+                btn.className = 'tab-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all bg-emerald-600 text-white shadow-md shrink-0';
+                currentFilter = btn.getAttribute('data-filter');
+                renderGallery();
+            });
+        });
+
+        searchInput.addEventListener('input', renderGallery);
+
+        // Lightbox Logic & Controls
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbTitle = document.getElementById('lbTitle');
+        const lbFilename = document.getElementById('lbFilename');
+        const lbBadge = document.getElementById('lbBadge');
+        const lbCounter = document.getElementById('lbCounter');
+        const btnDownload = document.getElementById('btnDownload');
+
+        let activeIndex = 0;
+        let zoomLevel = 1;
+
+        function openLightbox(index) {
+            activeIndex = index;
+            updateLightboxContent();
+            lightbox.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
+            lightbox.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+            lightbox.classList.remove('opacity-100', 'visible');
+            document.body.style.overflow = '';
+            resetZoom();
+        }
+
+        function updateLightboxContent() {
+            const currentMap = filteredMaps[activeIndex];
+            if (!currentMap) return;
+
+            const srcUrl = `images/Mapy/${currentMap.file}`;
+            lbImg.src = srcUrl;
+            lbImg.onerror = () => { lbImg.src = createPlaceholderDataUrl(currentMap.title, currentMap.file); };
+
+            lbTitle.textContent = currentMap.title;
+            lbFilename.textContent = currentMap.file;
+            lbBadge.textContent = currentMap.badge;
+            lbCounter.textContent = `${activeIndex + 1} / ${filteredMaps.length}`;
+            btnDownload.href = srcUrl;
+
+            resetZoom();
+        }
+
+        function resetZoom() {
+            zoomLevel = 1;
+            lbImg.style.transform = `scale(${zoomLevel})`;
+        }
+
+        document.getElementById('btnCloseLb').addEventListener('click', closeLightbox);
+
+        document.getElementById('btnPrev').addEventListener('click', () => {
+            if (filteredMaps.length === 0) return;
+            activeIndex = (activeIndex - 1 + filteredMaps.length) % filteredMaps.length;
+            updateLightboxContent();
+        });
+
+        document.getElementById('btnNext').addEventListener('click', () => {
+            if (filteredMaps.length === 0) return;
+            activeIndex = (activeIndex + 1) % filteredMaps.length;
+            updateLightboxContent();
+        });
+
+        document.getElementById('btnZoomIn').addEventListener('click', () => {
+            zoomLevel = Math.min(zoomLevel + 0.3, 3);
+            lbImg.style.transform = `scale(${zoomLevel})`;
+        });
+
+        document.getElementById('btnZoomOut').addEventListener('click', () => {
+            zoomLevel = Math.max(zoomLevel - 0.3, 0.8);
+            lbImg.style.transform = `scale(${zoomLevel})`;
+        });
+
+        document.getElementById('btnResetZoom').addEventListener('click', resetZoom);
+
+        // Keyboard Controls
+        window.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('invisible')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') document.getElementById('btnPrev').click();
+            if (e.key === 'ArrowRight') document.getElementById('btnNext').click();
+        });
+
+        // Initial render
+        renderGallery();
+    </script>
+</body>
+</html>
